@@ -2,7 +2,10 @@
 - how to store claude interactions?
 - why would I want multiple agents running at the same time?
 
-- How do the product writes work across DynamoDB and postgress? (The dual write design) - looks like it just writes to one, then the other without any rollback if one failed - we'd need to monitor this.
+- How do the product writes work across DynamoDB and postgress? (The dual write design) - looks like it just writes to one, then the other without any rollback if one failed - we'd need to monitor this. - tackle this
+- Check out the postgressDB under the hood too
+- Check out the UIs
+- Add some seed data for the full application - stock, browse products e.t.c
 
 
 ## Validation
