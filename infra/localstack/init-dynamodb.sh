@@ -40,11 +40,12 @@ seed_product() {
     }"
 }
 
-seed_product "11111111-1111-1111-1111-111111111111" "Wireless Mouse"      "24.99" "120" "Electronics" true
-seed_product "22222222-2222-2222-2222-222222222222" "Mechanical Keyboard" "89.99" "45"  "Electronics" true
-seed_product "33333333-3333-3333-3333-333333333333" "Running Shoes"       "59.99" "0"   "Sportswear"  false
-seed_product "44444444-4444-4444-4444-444444444444" "Yoga Mat"            "19.99" "200" "Sportswear"  true
-seed_product "55555555-5555-5555-5555-555555555555" "Coffee Grinder"      "34.50" "15"  "HomeGoods"   true
-seed_product "66666666-6666-6666-6666-666666666666" "Desk Lamp"           "22.00" "60"  "HomeGoods"   true
+row_count=$(($(wc -l < /seed/products.csv) - 1))
 
-echo "Seeded 6 products into ProductDetails."
+tail -n +2 /seed/products.csv | while IFS=, read -r product_id name price quantity category; do
+  in_stock=false
+  [ "$quantity" -gt 0 ] && in_stock=true
+  seed_product "$product_id" "$name" "$price" "$quantity" "$category" "$in_stock"
+done
+
+echo "Seeded $row_count products from /seed/products.csv into ProductDetails."

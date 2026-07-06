@@ -1,12 +1,8 @@
-- get my ssh key sorted again for ki repos
-- how to store claude interactions?
 - why would I want multiple agents running at the same time?
 
 
-- Check out the postgressDB under the hood too
-- Check out the UIs
-- Add some seed data for the full application - stock, browse products e.t.c
-
+- Walk through a full journey - add product, add to basket, buy success, buy fail
+- Add standard journeys as end to end tests
 - How do the product writes work across DynamoDB and postgress? (The dual write design) - looks like it just writes to one, then the other without any rollback if one failed - we'd need to monitor this. - tackle this
 
 
@@ -32,6 +28,7 @@ Run `docker compose exec localstack bash` to get onto docker permanently.
 Set the default region to uk: `export AWS_DEFAULT_REGION=eu-west-1`
 Run `awslocal dynamodb list-tables` to list tables
 Run `awslocal dynamodb describe-table --table-name ProductDetails` to check out the details
+Run `awslocal dynamodb scan --table-name ProductDetails` to see the particular table content
 
 ### PostgreSQL
 

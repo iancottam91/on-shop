@@ -9,6 +9,7 @@ services:
       - "5432:5432"
     volumes:
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./infra/seed-data/products.csv:/seed/products.csv:ro
     tmpfs:
       - /var/lib/postgresql/data
     healthcheck:
@@ -36,6 +37,7 @@ services:
       - "4566:4566"
     volumes:
       - ./infra/localstack/init-dynamodb.sh:/etc/localstack/init/ready.d/init-dynamodb.sh:ro
+      - ./infra/seed-data/products.csv:/seed/products.csv:ro
     healthcheck:
       test: ["CMD", "curl", "-sf", "http://localhost:4566/_localstack/health"]
       interval: 5s
