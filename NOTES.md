@@ -1,9 +1,15 @@
 - why would I want multiple agents running at the same time?
+- how to add shortcuts to the vscode editor
+- how do we feel about having raw sql queries in the js code?
 
 
-- Walk through a full journey - add product, add to basket, buy success, buy fail
-- Add standard journeys as end to end tests
-- How do the product writes work across DynamoDB and postgress? (The dual write design) - looks like it just writes to one, then the other without any rollback if one failed - we'd need to monitor this. - tackle this
+TESTS:
+- Add standard journeys as end to end tests before implementing the below:
+
+DESIGN IMPROVEMENTS TO MVP:
+- A successful checkout doesn't change stock in the DynamoDB. This will lead to stock level drift. We should tackle this with the outbox pattern.
+- Product writes go to postgress then dynamo. The dynamo write could fail when the postgress succeeds. To avoid this we could have an 'outbox' update table in postgress and then a worker that polls for these and updates dynamo, so we never update dynamo directly, only when postgress tells us to. (under plan `glittery-cuddling-spark.md`)
+- We'd want to alert if a failed payment doesn't reset the stock correctly as this would lead to drift in stock data from actual data
 
 
 ## Validation

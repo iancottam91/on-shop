@@ -69,6 +69,13 @@ reserved stock should be restored. `unset PAYMENT_FAILURE_RATE` and
 Checking out more than the available quantity returns `409` and leaves stock
 untouched.
 
+## Test it
+
+``` bash
+docker compose up -d postgres localstack stock-management-service
+cd tests && npm install && npm test.
+```
+
 ## Design notes / deviations from the diagram
 
 - The diagram's DynamoDB key (partition `productId`, sort `category`) can't
