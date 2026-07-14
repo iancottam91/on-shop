@@ -97,3 +97,23 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+
+  # Same image as purchase-service, permanently configured to fail payments.
+  # Lets integration tests exercise the checkout rollback path deterministically
+  # without needing to restart purchase-service with a different env var.
+  purchase-service-payment-failure:
+    build: ./services/purchase-service
+    ports:
+      - "3004:3000"
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgres://shop:shop@postgres:5432/inventory
+      REDIS_URL: redis://redis:6379
+      PAYMENT_FAILURE_RATE: "1"
+    volumes:
+      - ./services/purchase-service/src:/app/src
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy

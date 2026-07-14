@@ -73,7 +73,7 @@ untouched.
 
 ``` bash
 docker compose up -d postgres localstack stock-management-service
-cd tests && npm install && npm test.
+cd tests && npm install && npm test
 ```
 
 ## Design notes / deviations from the diagram
